@@ -1,6 +1,6 @@
 import type { User, Room, Message } from '../types';
 
-const API_BASE = 'http://localhost:8787/api';
+const API_BASE = 'https://onlinechatworker.ascastro875.workers.dev';
 
 export const api = {
   // Usuarios
