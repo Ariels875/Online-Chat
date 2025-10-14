@@ -139,13 +139,6 @@ npm run build
 - ✅ Password hashing and security
 - ✅ Edge deployment for low latency
 
-## 📚 Documentation
-
-For detailed documentation on each component:
-
-- **Backend API**: See [onlinechatworker/README.md](./onlinechatworker/README.md)
-- **Frontend**: See [onlinechat/FRONTEND_API.md](./onlinechat/FRONTEND_API.md)
-
 ## 🛠️ Tech Stack
 
 ### Frontend
