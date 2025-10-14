@@ -37,7 +37,7 @@ export const LoginForm = ({ onLogin, onRegister, onAnonymous, loading }: LoginFo
     <div className="login-container">
       <div className="login-form glow">
         <h1 className="login-title">
-          <span className="title-text">CYBER CHAT</span>
+          <span className="title-text">ArielsChat</span>
           <div className="title-underline"></div>
         </h1>
         
