@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { User, Room } from '../types';
+import type { User, Room } from '../types';
 import { ChatWindow } from './ChatWindow';
 import { Sidebar } from './Sidebar';
 import { UserProfile } from './UserProfile';
