@@ -5,7 +5,7 @@ const API_BASE = 'https://onlinechatworker.ascastro875.workers.dev';
 export const api = {
   // Usuarios
   async registerUser(username: string, password: string): Promise<User> {
-    const response = await fetch(`${API_BASE}/users/register`, {
+    const response = await fetch(`${API_BASE}/api/users/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
@@ -15,7 +15,7 @@ export const api = {
   },
 
   async loginUser(username: string, password: string): Promise<User> {
-    const response = await fetch(`${API_BASE}/users/login`, {
+    const response = await fetch(`${API_BASE}/api/users/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
@@ -25,7 +25,7 @@ export const api = {
   },
 
   async createAnonymousUser(displayName?: string, color?: string): Promise<User> {
-    const response = await fetch(`${API_BASE}/users/anonymous`, {
+    const response = await fetch(`${API_BASE}/api/users/anonymous`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ displayName, color })
@@ -35,13 +35,13 @@ export const api = {
   },
 
   async searchUsers(query: string): Promise<User[]> {
-    const response = await fetch(`${API_BASE}/users/search?q=${encodeURIComponent(query)}`);
+    const response = await fetch(`${API_BASE}/api/users/search?q=${encodeURIComponent(query)}`);
     if (!response.ok) throw new Error('Error al buscar usuarios');
     return response.json();
   },
 
   async updateUserColor(userId: string, color: string): Promise<void> {
-    const response = await fetch(`${API_BASE}/users/${userId}/color`, {
+    const response = await fetch(`${API_BASE}/api/users/${userId}/color`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ color })
@@ -51,7 +51,7 @@ export const api = {
 
   // Salas
   async createRoom(name: string, userId: string): Promise<Room> {
-    const response = await fetch(`${API_BASE}/rooms/create`, {
+    const response = await fetch(`${API_BASE}/api/rooms/create`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, userId })
@@ -61,7 +61,7 @@ export const api = {
   },
 
   async createDirectChat(userId1: string, userId2: string): Promise<Room> {
-    const response = await fetch(`${API_BASE}/rooms/direct`, {
+    const response = await fetch(`${API_BASE}/api/rooms/direct`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userId1, userId2 })
@@ -71,7 +71,7 @@ export const api = {
   },
 
   async joinRoom(roomId: string, userId: string): Promise<void> {
-    const response = await fetch(`${API_BASE}/rooms/join`, {
+    const response = await fetch(`${API_BASE}/api/rooms/join`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ roomId, userId })
@@ -80,19 +80,19 @@ export const api = {
   },
 
   async getUserRooms(userId: string): Promise<Room[]> {
-    const response = await fetch(`${API_BASE}/rooms/user/${userId}`);
+    const response = await fetch(`${API_BASE}/api/rooms/user/${userId}`);
     if (!response.ok) throw new Error('Error al obtener salas del usuario');
     return response.json();
   },
 
   async getPublicRooms(): Promise<Room[]> {
-    const response = await fetch(`${API_BASE}/rooms/public`);
+    const response = await fetch(`${API_BASE}/api/rooms/public`);
     if (!response.ok) throw new Error('Error al obtener salas públicas');
     return response.json();
   },
 
   async addUserToRoom(roomId: string, userId: string, invitedBy: string): Promise<void> {
-    const response = await fetch(`${API_BASE}/rooms/add-user`, {
+    const response = await fetch(`${API_BASE}/api/rooms/add-user`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ roomId, userId, invitedBy })
@@ -101,19 +101,19 @@ export const api = {
   },
 
   async getRoomParticipants(roomId: string): Promise<User[]> {
-    const response = await fetch(`${API_BASE}/rooms/${roomId}/participants`);
+    const response = await fetch(`${API_BASE}/api/rooms/${roomId}/participants`);
     if (!response.ok) throw new Error('Error al obtener participantes');
     return response.json();
   },
 
   async getRoomsWithMessages(userId: string): Promise<Room[]> {
-    const response = await fetch(`${API_BASE}/messages/user/${userId}/rooms-with-messages`);
+    const response = await fetch(`${API_BASE}/api/messages/user/${userId}/rooms-with-messages`);
     if (!response.ok) throw new Error('Error al obtener salas con mensajes');
     return response.json();
   },
 
   async getUnreadCounts(userId: string, lastSeen: Record<string, string>): Promise<Record<string, number>> {
-    const response = await fetch(`${API_BASE}/messages/user/${userId}/unread-counts?lastSeen=${encodeURIComponent(JSON.stringify(lastSeen))}`);
+    const response = await fetch(`${API_BASE}/api/messages/user/${userId}/unread-counts?lastSeen=${encodeURIComponent(JSON.stringify(lastSeen))}`);
     if (!response.ok) return {};
     return response.json();
   },
@@ -126,7 +126,7 @@ export const api = {
     senderDisplayName?: string,
     senderDisplayColor?: string
   ): Promise<Message> {
-    const response = await fetch(`${API_BASE}/messages/send`, {
+    const response = await fetch(`${API_BASE}/api/messages/send`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -142,13 +142,13 @@ export const api = {
   },
 
   async getRoomMessages(roomId: string, limit = 50, offset = 0): Promise<{ messages: Message[], hasMore: boolean }> {
-    const response = await fetch(`${API_BASE}/messages/room/${roomId}?limit=${limit}&offset=${offset}`);
+    const response = await fetch(`${API_BASE}/api/messages/room/${roomId}?limit=${limit}&offset=${offset}`);
     if (!response.ok) throw new Error('Error al obtener mensajes');
     return response.json();
   },
 
   async getUser(userId: string): Promise<User> {
-    const response = await fetch(`${API_BASE}/users/${userId}`);
+    const response = await fetch(`${API_BASE}/api/users/${userId}`);
     if (!response.ok) throw new Error('Error al obtener usuario');
     return response.json();
   }
