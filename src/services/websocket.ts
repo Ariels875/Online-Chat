@@ -20,7 +20,7 @@ export class WebSocketService {
         params.append('userId', userId);
       }
 
-      const wsUrl = `ws://onlinechatworker.ascastro875.workers.dev/ws?${params.toString()}`;
+      const wsUrl = `wss://onlinechatworker.ascastro875.workers.dev/ws?${params.toString()}`;
       
       try {
         this.ws = new WebSocket(wsUrl);
